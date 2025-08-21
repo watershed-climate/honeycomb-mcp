@@ -1,5 +1,7 @@
 # Honeycomb MCP
 
+> ⚠️ **DEPRECATED**: This self-hosted MCP server is deprecated. Please migrate to the hosted Honeycomb Model Context Protocol (MCP) solution at [Honeycomb MCP Documentation](https://docs.honeycomb.io/integrations/mcp/).
+
 A [Model Context Protocol](https://modelcontextprotocol.io) server for interacting with Honeycomb observability data. This server enables LLMs like Claude to directly analyze and query your Honeycomb datasets across multiple environments.
 
 ![Honeycomb MCP Logo](/img/logo.png)
