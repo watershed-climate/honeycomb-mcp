@@ -3,10 +3,7 @@
   "version": "0.0.1",
   "description": "Model Context Protocol server for Honeycomb",
   "type": "module",
-  "main": "build/index.mjs",
-  "bin": {
-    "honeycomb-mcp": "./build/server.js"
-  },
+  "main": "src/index.ts",
   "scripts": {
     "build": "tsc --noEmit && esbuild src/index.ts --bundle --platform=node --format=esm --outfile=build/index.mjs",
     "build:bundle": "esbuild src/index.ts --bundle --platform=node --format=esm --outfile=build/index.mjs",
@@ -34,7 +31,10 @@
     "access": "public"
   },
   "files": [
-    "build",
+    "src",
+    "!src/**/*.test.ts",
+    "!src/types/test.d.ts",
+    "docs",
     "README.md",
     "LICENSE"
   ],
