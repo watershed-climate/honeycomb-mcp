@@ -40,25 +40,28 @@ export function createTraceDeepLinkTool(api: HoneycombAPI) {
           throw new Error("Missing required parameter: traceId");
         }
 
-        // Get the team slug for the environment
+        // Get the team and environment slugs for Honeycomb UI links.
         const teamSlug = await api.getTeamSlug(params.environment);
-        
+        const environmentSlug = await api.getEnvironmentSlug(params.environment);
+
         // Start building the trace URL
-        let traceUrl = `https://ui.honeycomb.io/${teamSlug}/environments/${params.environment}/trace?trace_id=${encodeURIComponent(params.traceId)}`;
-        
+        let traceUrl = environmentSlug
+          ? `https://ui.honeycomb.io/${teamSlug}/environments/${encodeURIComponent(environmentSlug)}/trace?trace_id=${encodeURIComponent(params.traceId)}`
+          : `https://ui.honeycomb.io/${teamSlug}/trace?trace_id=${encodeURIComponent(params.traceId)}`;
+
         // Add optional parameters if provided
         if (params.spanId) {
           traceUrl += `&span=${encodeURIComponent(params.spanId)}`;
         }
-        
+
         if (params.traceStartTs) {
           traceUrl += `&trace_start_ts=${params.traceStartTs}`;
         }
-        
+
         if (params.traceEndTs) {
           traceUrl += `&trace_end_ts=${params.traceEndTs}`;
         }
-        
+
         // Add dataset parameter for more specific context
         if (params.dataset) {
           // Insert the dataset before the trace part in the URL

@@ -110,6 +110,21 @@ export class HoneycombAPI {
     return authInfo.team.slug;
   }
 
+  /**
+   * Get the Honeycomb UI environment slug for an environment.
+   *
+   * Classic Honeycomb teams do not have a UI environment slug.
+   */
+  async getEnvironmentSlug(environment: string): Promise<string | undefined> {
+    const env = this.environments.get(environment);
+    if (env?.environmentSlug) {
+      return env.environmentSlug;
+    }
+
+    const authInfo = await this.getAuthInfo(environment);
+    return authInfo.environment?.slug;
+  }
+
   private getApiKey(environment: string): string {
     const env = this.environments.get(environment);
     if (!env) {
